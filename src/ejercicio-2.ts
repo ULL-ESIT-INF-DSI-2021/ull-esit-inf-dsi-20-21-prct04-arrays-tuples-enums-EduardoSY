@@ -2,7 +2,7 @@
  * Comprobamos que las cadenas que estan encadenadas. Es decir, la palabra
  * siguiente debe empezar por las mismas letras por las que acaba la anterior.
  * @param cadena Array de palabras
- * @return Cadena que, si estan encadenadas, devuelve qué letras hacen la 
+ * @return Cadena que, si estan encadenadas, devuelve qué letras hacen la
  * encadenacion. Si no están encadenadas devuelve un mensaje de error.
  */
 export function meshArray(cadena: string[]): string {

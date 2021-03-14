@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.meshArray = void 0;
 /**
  * Comprobamos que las cadenas que estan encadenadas. Es decir, la palabra
  * siguiente debe empezar por las mismas letras por las que acaba la anterior.
@@ -25,5 +28,6 @@ function meshArray(cadena) {
     }
     return result;
 }
+exports.meshArray = meshArray;
 // let entrada: string[] = ["allow", "lowering", "ringmaster", "terror"];
 // console.log(meshArray(entrada));
