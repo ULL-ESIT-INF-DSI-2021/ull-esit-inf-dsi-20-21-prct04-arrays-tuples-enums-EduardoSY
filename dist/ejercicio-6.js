@@ -45,4 +45,4 @@ exports.distancia = distancia;
 // console.log(suma([4, 2], [1, 3]));
 // console.log(resta([4, 2], [1, 3]));
 // console.log(producto([4, 2], 2));
-console.log(distancia([4, 6], [1, 5]));
+// console.log(distancia([4, 6], [1, 5]));
