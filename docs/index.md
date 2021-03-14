@@ -352,7 +352,7 @@ Además de practicar más Typescript hemos aprendido a hacer pruebas unitarias y
 ## 5. Referencias y webgrafía
 - [Guión práctica 4](https://ull-esit-inf-dsi-2021.github.io/prct04-arrays-tuples-enums/): Guión de la práctica .
 - [Guía para crear un proyecto](https://ull-esit-inf-dsi-2021.github.io/typescript-theory/typescript-project-setup.html): Guía del profesor para crear un proyecto.
-- [Algoritmo ejercicio 7](https://www.geeksforgeeks.org/find-next-greater-number-set-digits/): Algoritmo empleado para encontrar el siguiente número mayor.
-- [Sistema factorial](https://en.wikipedia.org/wiki/Factorial_number_system): Página inglesa de Wikipedia sobre el sistema numérico factorial.
-- [Regex101](https://regex101.com/): Web para construir y testear expresiones regulares.
-- [Métodos de String](https://www.w3schools.com/js/js_string_methods.asp): Página con una gran lista de métodos aplicables a los string.
+- [Tutorial de instalación y configuracion Typedoc (Solo alumnos ULL)](https://drive.google.com/file/d/19LLLCuWg7u0TjjKz9q8ZhOXgbrKtPUme/view): Tutorial creado por el profesor sobre cómo instalar, configurar y utilizar Typedoc.
+- [Tutorial de instalación y configuración de Mocha y Chai en un proyecyo TS (Solo alumnos ULL)](https://drive.google.com/file/d/1-z1oNOZP70WBDyhaaUijjHvFtqd6eAmJ/view): Tutorial creado por el profesor sobre cómo instalar, configurar y utilizar Mocha y Chai.
+- [Apuntes sobre arrays, tuplas y enumerados](https://ull-esit-inf-dsi-2021.github.io/typescript-theory/typescript-arrays-tuples-enums.html): Apuntes creados por el profesor sobre arrays, tuplas y enumerables.
+- [Guia de Typedoc](https://typedoc.org/guides/installation/): Guia oficial de Typedoc
