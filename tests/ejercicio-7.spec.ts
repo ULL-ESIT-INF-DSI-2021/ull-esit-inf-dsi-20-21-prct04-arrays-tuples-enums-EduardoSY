@@ -9,6 +9,10 @@ describe('Ejer 7 suma function tests', () => {
   it('Sumar [6, 6, 2] con [5, 2, 3]', () => {
     expect(suma([6, 6, 2], [5, 2, 3])).to.deep.equal([11, 8, 5]);
   });
+
+  it('Sumar [6, 6, 2, 1] con [5, 2, 3, 1]', () => {
+    expect(suma([6, 6, 2, 1], [5, 2, 3, 1])).to.deep.equal([11, 8, 5, 2]);
+  });
 });
 
 describe('Ejer 7 resta function tests', () => {
