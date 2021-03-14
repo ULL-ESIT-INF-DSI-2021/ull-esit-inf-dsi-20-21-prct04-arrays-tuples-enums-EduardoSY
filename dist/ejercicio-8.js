@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.agent = void 0;
 /**
  * Dado un tablero y dos puntos, uno e inicio y otro de fin,
- * encontrar un camino y devolverlo
+ * encontrar un camino y devolverlo indicando los
+ * movimientos.
  * @param X Tamaño X del tablero
  * @param Y Tamaño Y del tablero
  * @param inicio  Punto de inicio
@@ -38,6 +39,6 @@ function agent(X, Y, inicio, fin) {
     return recorrido;
 }
 exports.agent = agent;
-let inicio = [1, 3];
-let fin = [7, 5];
-console.log(agent(6, 6, inicio, fin));
+// let inicio: Punto = [1, 3];
+// let fin: Punto = [7, 5];
+// console.log(agent(6, 6, inicio, fin));
