@@ -1,3 +1,9 @@
+/**
+ * Asigna un valor numerico a un color
+ * @param color Color de la resistencia
+ * @returns Valor que corresponde al color
+ */
+
 export function standard(color: string): number {
   color = color.toLowerCase();
   let result: number = 0;
@@ -36,9 +42,14 @@ export function standard(color: string): number {
   return result;
 }
 
-function decodeResistor(colores: string): number {
+/**
+ * Dado los colores de una resistencia obtenemos su correspondiente
+ * valor numerico.
+ * @param colores Colores de entrada de la resistencia separados por guion
+ * @returns Valor numerico de la resistencia
+ */
+export function decodeResistor(colores: string): number {
   let resultadostring: string = '';
-  // let resultado: number = 0;
   let colors: string[] = colores.split('-');
   if (colors.length == 1) {
     resultadostring += 0;
@@ -50,4 +61,4 @@ function decodeResistor(colores: string): number {
   return +resultadostring;
 }
 
-console.log("Colores: " + decodeResistor('violeta-marron-naranja'));
+// console.log("Colores: " + decodeResistor('violeta-marron-naranja'));
