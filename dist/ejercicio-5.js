@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.multiplyAll = void 0;
 /**
  * Debemos multiplicar un array de numeros por
  * otro numero
@@ -18,5 +21,6 @@ function multiplyAll(numeros) {
         return result;
     };
 }
+exports.multiplyAll = multiplyAll;
 ;
 // console.log(multiplyAll([2, 6, 8])(3));
