@@ -6,6 +6,9 @@ Para esta cuarta práctica vamos a programar algo más complejo en Typescript. E
 arrays, tuplas y enumerables. Todos los ejercicios los tenemos en el **[Enunciado de la Practica 3](https://ull-esit-inf-dsi-2021.github.io/prct04-arrays-tuples-enums/)**
 Además de esto, comenzaremos a trabajar con la generación de documentación con Typedoc y desarrollo dirigido por pruebas (TDD). 
 
+## NOTA ACLARATORIA
+En este informe no están los comentarios necesarios para generar documentación a partir del código fuente con Typedoc. Esto lo he hecho para así tener un informe menos extenso, más limpio y con un código menos engorroso. Si quieres ver los comentarios utilizados para Typedoc puedes acceder al código fuente directamente gracias al enlace en cada apartado.
+
 ## 2. Pasos previos
 
 
@@ -190,5 +193,166 @@ _[Acceso al código fuente]()_
 
 Debemos crear un tipo de dato que nos permite representar un punto bidimensional, es decir, que tenga coordenadas X e Y.
 
+```typescript
+type Punto = [number, number];
 
+export function suma(p1: Punto, p2: Punto): Punto {
+  return [p1[0] + p2[0], p1[1] + p2[1]];
+}
 
+export function resta(p1: Punto, p2: Punto): Punto {
+  return [p1[0] - p2[0], p1[1] - p2[1]];
+}
+
+export function producto(p1: Punto, num: number): Punto {
+  return [p1[0] * num, p1[1] * num];
+}
+
+export function distancia(p1: Punto, p2: Punto): number {
+  return parseFloat(Math.sqrt(Math.pow(p1[0] - p2 [0], 2) +
+  Math.pow(p1[1] - p2 [1], 2)).toFixed(4));
+}
+```
+
+Para declarar el tipo de hacemos uso de **type**. En nuestro caso declaramos un **Punto** que estará formado por dos numbers.
+Con esto ya podemos definir para cada una de nuestras funciones que los parámetros serán de tipo Punto.
+
+La primera función es la suma, que recibe dos puntos y devuelve un tercer punto como resultado.
+La operación se suma se hace sumando componente a componente ambos puntos.
+
+La segunda función es la resta, que recibe dos puntos y devuelve un tercer punto como resultado.
+La operación se resta se hace calculando la diferencia componente a componente entre ambos puntos.
+
+La tercera función es el producto, que recibe un punto y un número y devuelve un tercer punto como resultado.
+La operación se hace simplemente multiplicando cada componente del punto por un número.
+
+La cuarta y última función es la distancia Euclídea, que recibe dos puntos y devuelve un número como resultado.
+La fórmula para calcularla es:
+La raiz cuadrada de la suma de las diferencias de sus componentes al cuadrado. Es decir: sqrt((p1[0] - p2[0])^2 + (p1[1] - p2[1])^2)
+
+### 3.7 Puntos n-dimensionales
+_[Acceso al código fuente]()_
+
+Este ejercicio es igual al anterior con la excepción de que en este caso no tratamos con puntos de dos dimensiones, es decir, con coordenadas X e Y, sino que pueden tener 3, 4, 10, 1000 componentes.
+Para hacer las operaciones en este caso debemos tener en cuenta de que, en caso de tratar dos puntos, ambos deben tener la misma dimensión. Por ejemplo, un punto de 5 dimensiones puede sumarse con otro punto de 5 dimensiones pero no con un punto de 6 dimensiones.
+
+```typescript
+type PuntoNdim = [number, number, number, ...number[]];
+
+export function suma(p1: PuntoNdim, p2: PuntoNdim): PuntoNdim|string {
+  let result: PuntoNdim = [0, 0, 0];
+  if (p1.length != p2.length) {
+    return 'Los puntos no son compatibles';
+  }
+  for (let i: number = 0; i < p1.length; i++) {
+    result[i] = p1[i] + p2[i];
+  }
+  return result;
+}
+
+export function resta(p1: PuntoNdim, p2: PuntoNdim): PuntoNdim|string {
+  let result: PuntoNdim = [0, 0, 0];
+  if (p1.length != p2.length) {
+    return 'Los puntos no son compatibles';
+  }
+  for (let i: number = 0; i < p1.length; i++) {
+    result[i] = p1[i] - p2[i];
+  }
+  return result;
+}
+
+export function producto(p1: PuntoNdim, num: number): PuntoNdim {
+  let result: PuntoNdim = [0, 0, 0];
+  let index: number = 0;
+  for (let valor of p1) {
+    result[index] = valor * num;
+    index++;
+  }
+  return result;
+}
+
+export function distancia(p1: PuntoNdim, p2: PuntoNdim): number|string {
+  let result: number = 0;
+  if (p1.length != p2.length) {
+    return 'Los puntos no son compatibles';
+  }
+  for (let i: number = 0; i < p1.length; i++) {
+    result += Math.pow(p1[i] - p2[i], 2);
+  }
+  result = Math.sqrt(result);
+  result = parseFloat(result.toFixed(4));
+  return result;
+}
+```
+
+Para definir los puntos ndimensionales volvemos a hacer uso de **type**. En este caso especificamos que los tres primeros componentes sean de tipo number. Con esto nos aseguramos que los puntos de N dimensiones tengan, como minimo, 3 dimensiones.
+Para hacer que puedan tener más componentes ponemos **...number[]**.
+
+La forma de trabajar las operaciones es exactamente a la descrita en el apartado 3.7 con la única diferencia de que ahora comprobamos que ambos puntos sean de las mismas dimensiones. Esto lo hacemos comprobando su longitud. Si la longitud de ambos coincide quiere decir que tienen la misma cantidad de componentes y, por tanto, las mismas dimensiones.
+
+### 3.8 El agente
+_[Acceso al código fuente]()_
+
+Tenemos un tablero de determinadas dimensiones. El objetivo es que, dado un punto de inicio y un punto final, encontrar un camino que una ambos, almacenando en un vector las coordenadas de los movimientos realizados.
+
+```typescript
+type Punto = [number, number];
+
+export function agent(X: number, Y: number, inicio: Punto, fin: Punto):
+string[] {
+  let recorrido: string[] = [];
+  if ((inicio[0] >= X) || (inicio[1] >= Y) || (fin[0] >= X) || (fin[1] >= Y)) {
+    recorrido.push('Fuera de los limites');
+    return recorrido;
+  }
+  let moving: Punto = [inicio[0], inicio[1]];
+  while ((moving[0] != fin[0]) && (moving[1] != fin[1])) {
+    if (moving[0] > fin[0]) {
+      moving[0]--;
+      recorrido.push('Oeste');
+    }
+    if (moving[0] < fin[0]) {
+      moving[0]++;
+      recorrido.push('Este');
+    }
+    if (moving[1] > fin[1]) {
+      moving[1]--;
+      recorrido.push('Sur');
+    }
+    if (moving[1] < fin[1]) {
+      moving[1]++;
+      recorrido.push('Norte');
+    }
+  }
+  return recorrido;
+}
+```
+
+Lo primero que hacemos es definir un punto. Este es el tipo que usaremos para representar tanto el punto de inicio como el punto final.
+
+La función **agent**, que será la que haga el recorrido, recibe como parámetro las dimensiones X e Y del tablero y los puntos de inicio y final.
+Lo primero que vamos a comprobar es que los puntos formen parte del tablero y no estén fuera de este. Si se salen de las dimensiones devolvemos el vector de resultado con un mensaje que pone **Fuera de los limites**.
+
+En caso de que los puntos estén dentro del tablero haremos lo siguiente:
+Hacemos una copia del punto de inicio. Esta copia será la que vayamos moviendo por el tablero.
+Entonces, hasta que el punto que vamos moviendo no se encuentre en la posición del final, vamos comparando las componentes de estos dos puntos.
+
+Dependiendo de hacia donde sea el movimiento lo tomamos como positivo o negativo. Si el movimiento es positivo respecto al eje de las X o Y, es decir, Este o Norte, sumamos 1 al valor que corresponda según el eje. Si por el contrario el movimiento es negativo respecto a alguno de estos ejes, es decir, un movimiento hacia el Oeste o el Sur, restamos 1.
+
+Por cada movimiento que hagamos realizamos un **push** a un vector de string, donde iremos almacenando el recorrido.
+Una vez llegamos al final devolvemos ese vector.
+
+## 4. Conclusión
+Este tipo de prácticas donde se nos proponen varios ejercicios que no ocupan muchas lineas me parecen muy amenos a la par que útiles. Podemos tratar diversos temas en una misma práctica pero sin resultar tedioso ya que cada ejercicio nos plantea algo diferente.
+
+En este caso no he tenido muchos problemas. Lo más destacable es que he tenido ciertas dudas a la hora de cómo implementar los puntos en los tres últimos ejercicios pero más allá de eso todo ha ido bien.
+
+Además de practicar más Typescript hemos aprendido a hacer pruebas unitarias y cómo generar documentación a partir de nuestro código fuente. 
+
+## 5. Referencias y webgrafía
+- [Guión práctica 4](https://ull-esit-inf-dsi-2021.github.io/prct04-arrays-tuples-enums/): Guión de la práctica .
+- [Guía para crear un proyecto](https://ull-esit-inf-dsi-2021.github.io/typescript-theory/typescript-project-setup.html): Guía del profesor para crear un proyecto.
+- [Algoritmo ejercicio 7](https://www.geeksforgeeks.org/find-next-greater-number-set-digits/): Algoritmo empleado para encontrar el siguiente número mayor.
+- [Sistema factorial](https://en.wikipedia.org/wiki/Factorial_number_system): Página inglesa de Wikipedia sobre el sistema numérico factorial.
+- [Regex101](https://regex101.com/): Web para construir y testear expresiones regulares.
+- [Métodos de String](https://www.w3schools.com/js/js_string_methods.asp): Página con una gran lista de métodos aplicables a los string.
