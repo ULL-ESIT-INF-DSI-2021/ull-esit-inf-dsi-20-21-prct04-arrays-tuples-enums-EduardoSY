@@ -108,3 +108,87 @@ Lo primero es buscar la primera coincidencia de la ultima letra de la **palabra1
 Si todos coinciden quiere decir que ambas palabras están encadenadas. Entonces guardamos la coincidencia en un string y pasamos a analizar el siguiente par.
 
 En caso de que no estén encadenadas vamos a devolver un mensaje de error.
+
+### 3.3 Calcular la media y concatenar cadenas
+_[Acceso al código fuente]()_
+
+Para este ejercicio vamos a recibir un array con números y caracteres. Debemos devolver, por un lado, un array con el valor numérico de la media entre todos los números de la entrada y, por otro lado, un string que una todos los caracteres de la entrada.
+
+```typescript
+export function meanAndConcatenate(cadena: (number|string)[]):
+(number|string)[] {
+  let nnumbers: number = 0;
+  let resultNumber: number = 0;
+  let cadenaAux: string = '';
+  let resultado: (number|string)[] = [];
+  cadena.forEach((item: number | string) => {
+    if (typeof item === "number") {
+      resultNumber += item;
+      nnumbers++;
+    } else if (typeof item === "string") {
+      cadenaAux += item;
+    }
+  });
+
+  resultado.push(parseFloat((resultNumber/nnumbers).toFixed(2)));
+  resultado.push(cadenaAux);
+  return resultado;
+}
+```
+El funcionamiento del código es bastante sencillo. Vamos a analizar cada elemento de la cadena de entrada, que pueden ser tanto tipo **number** como tipo **string**. Entonces comparamos el tipo de dato con **typeof**. En caso de que sea un número iremos acumulando la suma en una variable así como contando cuantos número hay para así poder calcular la media. Si por el contrario se trata de un string, lo que haremos es ir añadiendo caracteres aun string donde guardamos el resultado. Finalmente hacemos un push a un string que devolveremos donde primero guardamos el valor de la media y luego la cadena de todos los caracteres juntos.
+
+### 3.4 Mover los ceros al final
+_[Acceso al código fuente]()_
+
+Dado un array de números, debemos mover TODOS los ceros al final sin alterar el orden de los demás números.
+```typescript
+export function moveZeros(numeros: number[]):number[] {
+  let contador: number = 0;
+  numeros.forEach((value, index) => {
+    if (value === 0) {
+      numeros.splice(index, 1);
+      contador++;
+    }
+  });
+  for (contador; contador > 0; contador--) {
+    numeros.push(0);
+  }
+  return numeros;
+}
+```
+El algoritmo para la implementación es muy sencillo. Vamos a recorrer el array de números que recibimos como entrada. Si el valor es un 0, cogemos el índice de la posición, eliminamos esa posición de array y sumamos uno al contador de ceros. Al eliminar esa posición no modifico el orden de de los demás elementos. 
+
+Una vez he recorrido todo el array tengo almacenado en la variable **contador** cuántos ceros habian en el array. Por tanto, hago tantos push como ceros habían. Con esto consigo que todos los ceros estén al final del array.
+
+### 3.5 Factoría de multiplicaciones
+_[Acceso al código fuente]()_
+
+Este ejercicio es sencillo pero tiene una ligera complicación. La idea es tener un array de números como parámetro y multiplicar cada elemento de ese array por un número también pasado como parámetro. El caso es que estos parámetros no están dentro de la misma función sino que deben llamarse de la siguiente manera: 
+
+```
+multiplyAll([2, 6, 8])(3)
+```
+
+He ahí donde está la complicación. 
+
+```typescript
+export function multiplyAll(numeros: number[]) {
+  return function(num: number): number[] {
+    let result: number[] = [];
+    for (let valor of numeros) {
+      result.push(valor * num);
+    }
+    return result;
+  };
+};
+```
+Para poder llamar a una función tal cual hemos dicho antes debemos hacer que el return de la primera función sea otra función. Entonces, dentro de **multiplyAll**, en el return
+ponemos una función que reciba y número y lo que haga sea simplemente recorrer cada elemento del array de entrada de **multiplyAll**. Vamos almacenando estos elementos en un nuevo array y una vez hemos multiplicado todo podemos devolverlo.
+
+### 3.6 Puntos bi-dimensionales
+_[Acceso al código fuente]()_
+
+Debemos crear un tipo de dato que nos permite representar un punto bidimensional, es decir, que tenga coordenadas X e Y.
+
+
+
