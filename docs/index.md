@@ -155,7 +155,7 @@ Cremos una primera función, **standard**, cuya función es simplemente analizar
 La función principal es, en este caso, **decodeResisto**. Separamos los colores que nos pasan en la cadena \"colores\" gracias a que deben ir separados por un guion.
 Cada uno de los dos primeros colores lo pasamos a la funcion **standard** y guardamos el resultado en un string. Cuando hemos analizado los dos colores devolvemos ese string pasandolo a número aplicandole el +.
 
-** TESTS REALIZADOS **
+**TESTS REALIZADOS**
 ```
 import 'mocha';
 import {expect} from 'chai';
@@ -219,7 +219,7 @@ Si todos coinciden quiere decir que ambas palabras están encadenadas. Entonces 
 
 En caso de que no estén encadenadas vamos a devolver un mensaje de error.
 
-** TESTS REALIZADOS **
+**TESTS REALIZADOS**
 ``` 
 import 'mocha';
 import {expect} from 'chai';
@@ -267,7 +267,7 @@ export function meanAndConcatenate(cadena: (number|string)[]):
 
 El funcionamiento del código es bastante sencillo. Vamos a analizar cada elemento de la cadena de entrada, que pueden ser tanto tipo **number** como tipo **string**. Entonces comparamos el tipo de dato con **typeof**. En caso de que sea un número iremos acumulando la suma en una variable así como contando cuantos número hay para así poder calcular la media. Si por el contrario se trata de un string, lo que haremos es ir añadiendo caracteres aun string donde guardamos el resultado. Finalmente hacemos un push a un string que devolveremos donde primero guardamos el valor de la media y luego la cadena de todos los caracteres juntos.
 
-** TESTS REALIZADOS **
+**TESTS REALIZADOS**
 ``` 
 import 'mocha';
 import {expect} from 'chai';
@@ -305,7 +305,7 @@ El algoritmo para la implementación es muy sencillo. Vamos a recorrer el array 
 
 Una vez he recorrido todo el array tengo almacenado en la variable **contador** cuántos ceros habian en el array. Por tanto, hago tantos push como ceros habían. Con esto consigo que todos los ceros estén al final del array.
 
-** TESTS REALIZADOS **
+**TESTS REALIZADOS**
 ``` 
 import 'mocha';
 import {expect} from 'chai';
@@ -350,7 +350,7 @@ export function multiplyAll(numeros: number[]) {
 Para poder llamar a una función tal cual hemos dicho antes debemos hacer que el return de la primera función sea otra función. Entonces, dentro de **multiplyAll**, en el return
 ponemos una función que reciba y número y lo que haga sea simplemente recorrer cada elemento del array de entrada de **multiplyAll**. Vamos almacenando estos elementos en un nuevo array y una vez hemos multiplicado todo podemos devolverlo.
 
-** TESTS REALIZADOS **
+**TESTS REALIZADOS**
 ``` 
 import 'mocha';
 import {expect} from 'chai';
@@ -409,7 +409,7 @@ La cuarta y última función es la distancia Euclídea, que recibe dos puntos y 
 La fórmula para calcularla es:
 La raiz cuadrada de la suma de las diferencias de sus componentes al cuadrado. Es decir: sqrt((p1[0] - p2[0])^2 + (p1[1] - p2[1])^2)
 
-** TESTS REALIZADOS **
+**TESTS REALIZADOS**
 ``` 
 import 'mocha';
 import {expect} from 'chai';
@@ -503,7 +503,7 @@ Para hacer que puedan tener más componentes ponemos **...number[]**.
 
 La forma de trabajar las operaciones es exactamente a la descrita en el apartado 3.7 con la única diferencia de que ahora comprobamos que ambos puntos sean de las mismas dimensiones. Esto lo hacemos comprobando su longitud. Si la longitud de ambos coincide quiere decir que tienen la misma cantidad de componentes y, por tanto, las mismas dimensiones.
 
-** TESTS REALIZADOS **
+**TESTS REALIZADOS**
 ``` 
 import 'mocha';
 import {expect} from 'chai';
@@ -593,7 +593,7 @@ Dependiendo de hacia donde sea el movimiento lo tomamos como positivo o negativo
 Por cada movimiento que hagamos realizamos un **push** a un vector de string, donde iremos almacenando el recorrido.
 Una vez llegamos al final devolvemos ese vector.
 
-** TESTS REALIZADOS **
+**TESTS REALIZADOS**
 ``` 
 import 'mocha';
 import {expect} from 'chai';
