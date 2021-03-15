@@ -47,10 +47,54 @@ La linea en cuestión es:
 ```
 Ahora lo que nos falta es comentar el código. Para ello vamos a seguir las indicaciones que nos da la [Guia de Typedoc](https://typedoc.org/guides/installation/).
 
+Cuando ya tengamos todo comentado podemos ejecutar Typedoc con el siguiente comando:
+
+```bash
+...$ npm run doc
+```
+Aquí tenemos un [tutorial de instalación y configuracion de Typedoc](https://drive.google.com/file/d/19LLLCuWg7u0TjjKz9q8ZhOXgbrKtPUme/view) creado por el profesor de la asignatura. Este enlace es **solo apto para alumno de la ULL**.
+
+Ahora tenemos que instalar Mocha y Chai. Para ello ejecutamos:
+
+```bash
+...$ npm install --save-dev mocha chai @types/mocha @types/chai ts-node
+```
+
+Ahora debemos crear un directorio para los tests. En nuestro caso se llamará **tests**. También debemos crear un fichero denominado **.mocharc.json**. A este fichero le añadimos
+lo siguiente: 
+
+```
+{
+  "extension": ["ts"],
+  "spec": "tests/**/*.spec.ts",
+  "require": "ts-node/register"
+}
+```
+
+Dentro del directorio **tests** iremos creando las pruebas que iremos viendo a continuación. 
+En general la estructura de las pruebas es muy parecida. Las siguientes lineas son las que se ponen al principios de los ficheros de pruebas que los denominamos como **ejercicio-X.spec.ts**.
+
+```
+import 'mocha';
+import {expect} from 'chai';
+import {standard} from '../src/ejercicio-1';
+```
+La tercera linea incluye las funciones. Debemos poner el nombre de la función a importar entre los corchetes seguidos con la ruta del fichero donde se encuentra.
+
+Algo importante a resaltar es que debemos poner **export** antes de nuestras funciones para que estas sean accesibles desde fuera del fichero.
+
+Finalmente, para poder ejecutar las pruebas debemos añadir una linea al apartado de **scripts** de nuestro fichero **package.json**
+La linea en cuestión es:
+
+```
+ "test": "mocha",
+```
+Aquí tenemos un [tutorial de instalación y configuración de Mocha y Chai en un proyecto TS](https://drive.google.com/file/d/1-z1oNOZP70WBDyhaaUijjHvFtqd6eAmJ/view) creado por el profesor de la asignatura. Este enlace es **solo apto para alumno de la ULL**.
+
 ## 3. Ejercicios
 
 ### 3.1 Decodificar resistencias
-_[Acceso al código fuente]()_
+_[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-1.ts)_
 
 Este ejercicio consiste en traducir el código de colores de las resistencias a un valor numérico. Cada color tiene un valor asignado según un estándar. Independientemente de la cantidad de colores que nos digan solo tendremos en cuenta los dos primeros.
 
@@ -112,7 +156,7 @@ La función principal es, en este caso, **decodeResisto**. Separamos los colores
 Cada uno de los dos primeros colores lo pasamos a la funcion **standard** y guardamos el resultado en un string. Cuando hemos analizado los dos colores devolvemos ese string pasandolo a número aplicandole el +.
 
 ### 3.2 Palabras encadenadas en un array
-_[Acceso al código fuente]()_
+_[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-2.ts)_
 
 Dado un array de palabras, debemos comprobar si un estas palabras están encadenadas o no. Eso quiere decir que el final de una palabra debe coincidir con el inicio de la siguiente. Para que se consideren encadenadas debe haber al menos una letra. Si todas están encadenadas debemos devolver un array con todas las coincidencias que hacen que estén encadenadas. En caso de que no estén encadenadas debemos devolver un mensaje de error.
 
@@ -148,7 +192,7 @@ Si todos coinciden quiere decir que ambas palabras están encadenadas. Entonces 
 En caso de que no estén encadenadas vamos a devolver un mensaje de error.
 
 ### 3.3 Calcular la media y concatenar cadenas
-_[Acceso al código fuente]()_
+_[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-3.ts)_
 
 Para este ejercicio vamos a recibir un array con números y caracteres. Debemos devolver, por un lado, un array con el valor numérico de la media entre todos los números de la entrada y, por otro lado, un string que una todos los caracteres de la entrada.
 
@@ -176,7 +220,7 @@ export function meanAndConcatenate(cadena: (number|string)[]):
 El funcionamiento del código es bastante sencillo. Vamos a analizar cada elemento de la cadena de entrada, que pueden ser tanto tipo **number** como tipo **string**. Entonces comparamos el tipo de dato con **typeof**. En caso de que sea un número iremos acumulando la suma en una variable así como contando cuantos número hay para así poder calcular la media. Si por el contrario se trata de un string, lo que haremos es ir añadiendo caracteres aun string donde guardamos el resultado. Finalmente hacemos un push a un string que devolveremos donde primero guardamos el valor de la media y luego la cadena de todos los caracteres juntos.
 
 ### 3.4 Mover los ceros al final
-_[Acceso al código fuente]()_
+_[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-4.ts)_
 
 Dado un array de números, debemos mover TODOS los ceros al final sin alterar el orden de los demás números.
 ```typescript
@@ -199,7 +243,7 @@ El algoritmo para la implementación es muy sencillo. Vamos a recorrer el array 
 Una vez he recorrido todo el array tengo almacenado en la variable **contador** cuántos ceros habian en el array. Por tanto, hago tantos push como ceros habían. Con esto consigo que todos los ceros estén al final del array.
 
 ### 3.5 Factoría de multiplicaciones
-_[Acceso al código fuente]()_
+_[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-5.ts)_
 
 Este ejercicio es sencillo pero tiene una ligera complicación. La idea es tener un array de números como parámetro y multiplicar cada elemento de ese array por un número también pasado como parámetro. El caso es que estos parámetros no están dentro de la misma función sino que deben llamarse de la siguiente manera: 
 
@@ -224,7 +268,7 @@ Para poder llamar a una función tal cual hemos dicho antes debemos hacer que el
 ponemos una función que reciba y número y lo que haga sea simplemente recorrer cada elemento del array de entrada de **multiplyAll**. Vamos almacenando estos elementos en un nuevo array y una vez hemos multiplicado todo podemos devolverlo.
 
 ### 3.6 Puntos bi-dimensionales
-_[Acceso al código fuente]()_
+_[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-6.ts)_
 
 Debemos crear un tipo de dato que nos permite representar un punto bidimensional, es decir, que tenga coordenadas X e Y.
 
@@ -266,7 +310,7 @@ La fórmula para calcularla es:
 La raiz cuadrada de la suma de las diferencias de sus componentes al cuadrado. Es decir: sqrt((p1[0] - p2[0])^2 + (p1[1] - p2[1])^2)
 
 ### 3.7 Puntos n-dimensionales
-_[Acceso al código fuente]()_
+_[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-7.ts)_
 
 Este ejercicio es igual al anterior con la excepción de que en este caso no tratamos con puntos de dos dimensiones, es decir, con coordenadas X e Y, sino que pueden tener 3, 4, 10, 1000 componentes.
 Para hacer las operaciones en este caso debemos tener en cuenta de que, en caso de tratar dos puntos, ambos deben tener la misma dimensión. Por ejemplo, un punto de 5 dimensiones puede sumarse con otro punto de 5 dimensiones pero no con un punto de 6 dimensiones.
@@ -326,7 +370,7 @@ Para hacer que puedan tener más componentes ponemos **...number[]**.
 La forma de trabajar las operaciones es exactamente a la descrita en el apartado 3.7 con la única diferencia de que ahora comprobamos que ambos puntos sean de las mismas dimensiones. Esto lo hacemos comprobando su longitud. Si la longitud de ambos coincide quiere decir que tienen la misma cantidad de componentes y, por tanto, las mismas dimensiones.
 
 ### 3.8 El agente
-_[Acceso al código fuente]()_
+_[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-8.ts)_
 
 Tenemos un tablero de determinadas dimensiones. El objetivo es que, dado un punto de inicio y un punto final, encontrar un camino que una ambos, almacenando en un vector las coordenadas de los movimientos realizados.
 
@@ -388,6 +432,6 @@ Además de practicar más Typescript hemos aprendido a hacer pruebas unitarias y
 - [Guión práctica 4](https://ull-esit-inf-dsi-2021.github.io/prct04-arrays-tuples-enums/): Guión de la práctica .
 - [Guía para crear un proyecto](https://ull-esit-inf-dsi-2021.github.io/typescript-theory/typescript-project-setup.html): Guía del profesor para crear un proyecto.
 - [Tutorial de instalación y configuracion Typedoc (Solo alumnos ULL)](https://drive.google.com/file/d/19LLLCuWg7u0TjjKz9q8ZhOXgbrKtPUme/view): Tutorial creado por el profesor sobre cómo instalar, configurar y utilizar Typedoc.
-- [Tutorial de instalación y configuración de Mocha y Chai en un proyecyo TS (Solo alumnos ULL)](https://drive.google.com/file/d/1-z1oNOZP70WBDyhaaUijjHvFtqd6eAmJ/view): Tutorial creado por el profesor sobre cómo instalar, configurar y utilizar Mocha y Chai.
+- [Tutorial de instalación y configuración de Mocha y Chai en un proyecto TS (Solo alumnos ULL)](https://drive.google.com/file/d/1-z1oNOZP70WBDyhaaUijjHvFtqd6eAmJ/view): Tutorial creado por el profesor sobre cómo instalar, configurar y utilizar Mocha y Chai.
 - [Apuntes sobre arrays, tuplas y enumerados](https://ull-esit-inf-dsi-2021.github.io/typescript-theory/typescript-arrays-tuples-enums.html): Apuntes creados por el profesor sobre arrays, tuplas y enumerables.
 - [Guia de Typedoc](https://typedoc.org/guides/installation/): Guia oficial de Typedoc
