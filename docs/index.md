@@ -11,6 +11,41 @@ En este informe no están los comentarios necesarios para generar documentación
 
 ## 2. Pasos previos
 
+Antes de comenzar con los ejercicios debemos saber crear un proyecto. En caso de que no sepamos podemos seguir esta [Guía para crear un proyecto](https://ull-esit-inf-dsi-2021.github.io/typescript-theory/typescript-project-setup.html).
+
+Durante esta práctica vamos a utilizar Typedoc. Por lo tanto debemos tenerlo instalado y configurado.
+Para instalarlo nos situamos en el directorio raiz de nuestro proyecto y tecleamos:
+
+```bash
+...$ npm install --save-dev typedoc
+```
+Una vez instalado creamos un fichero **typedoc.json** y añadimos las siguientes lineas:
+
+```
+{
+  "entryPoints": [
+    "./src/ejercicio-1.ts",
+    "./src/ejercicio-2.ts",
+    "./src/ejercicio-3.ts",
+    "./src/ejercicio-4.ts",
+    "./src/ejercicio-5.ts",
+    "./src/ejercicio-6.ts",
+    "./src/ejercicio-7.ts",
+    "./src/ejercicio-8.ts"
+  ],
+  "out": "./docum"
+}
+```
+En **entryPoints** ponemos los ficheros a partir de los cuales se generará la documentación, es decir, nuestro código fuente. El **out** ponemos el directorio de salida.
+Cuidado con el nombre que le pongamos ya que si, por ejemplo, ponemos **docs** y en nuestro repositorio de Github tenemos un directorio también denominado docs para albergar nuestro informe de GH Pages, al hacer un push sobreescribiremos el que esté en nuestro repo. Es por eso que he decidido llamarlo **docum**.
+
+Por último debemos añadir una linea al apartado de **scripts** de nuestro fichero **package.json**
+La linea en cuestión es:
+
+```
+"doc": "typedoc"
+```
+Ahora lo que nos falta es comentar el código. Para ello vamos a seguir las indicaciones que nos da la [Guia de Typedoc](https://typedoc.org/guides/installation/).
 
 ## 3. Ejercicios
 
