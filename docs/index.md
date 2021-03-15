@@ -155,6 +155,34 @@ Cremos una primera función, **standard**, cuya función es simplemente analizar
 La función principal es, en este caso, **decodeResisto**. Separamos los colores que nos pasan en la cadena \"colores\" gracias a que deben ir separados por un guion.
 Cada uno de los dos primeros colores lo pasamos a la funcion **standard** y guardamos el resultado en un string. Cuando hemos analizado los dos colores devolvemos ese string pasandolo a número aplicandole el +.
 
+** TESTS REALIZADOS **
+```
+import 'mocha';
+import {expect} from 'chai';
+import {standard} from '../src/ejercicio-1';
+import {decodeResistor} from '../src/ejercicio-1';
+
+describe('standard function tests', () => {
+  it('standard(violeta) returns 7', () => {
+    expect(standard('violeta')).to.be.equal(7);
+  });
+});
+
+describe('decodeResistor function tests', () => {
+  it('decodeResistor(violeta) returns 7', () => {
+    expect(decodeResistor('violeta')).to.be.equal(7);
+  });
+
+  it('decodeResistor(violeta) returns 71', () => {
+    expect(decodeResistor('violeta-marron-naranja')).to.be.equal(71);
+  });
+
+  it('decodeResistor(violeta) returns 65', () => {
+    expect(decodeResistor('azul-verde')).to.be.equal(65);
+  });
+});
+```
+
 ### 3.2 Palabras encadenadas en un array
 _[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-2.ts)_
 
@@ -191,6 +219,25 @@ Si todos coinciden quiere decir que ambas palabras están encadenadas. Entonces 
 
 En caso de que no estén encadenadas vamos a devolver un mensaje de error.
 
+** TESTS REALIZADOS **
+``` 
+import 'mocha';
+import {expect} from 'chai';
+import {meshArray} from '../src/ejercicio-2';
+
+describe('meshArray function tests', () => {
+  it('[allow, lowering, ringmaster, terror] returns lowringter', () => {
+    expect(meshArray(["allow", "lowering", "ringmaster", "terror"])).to.deep.
+        equal("lowringter");
+  });
+
+  it('[allowi, lowering] returns Error al encadenar', () => {
+    expect(meshArray(["allowi", "lowering"])).to.deep.
+        equal("Error al encadenar");
+  });
+});
+```
+
 ### 3.3 Calcular la media y concatenar cadenas
 _[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-3.ts)_
 
@@ -217,7 +264,22 @@ export function meanAndConcatenate(cadena: (number|string)[]):
   return resultado;
 }
 ```
+
 El funcionamiento del código es bastante sencillo. Vamos a analizar cada elemento de la cadena de entrada, que pueden ser tanto tipo **number** como tipo **string**. Entonces comparamos el tipo de dato con **typeof**. En caso de que sea un número iremos acumulando la suma en una variable así como contando cuantos número hay para así poder calcular la media. Si por el contrario se trata de un string, lo que haremos es ir añadiendo caracteres aun string donde guardamos el resultado. Finalmente hacemos un push a un string que devolveremos donde primero guardamos el valor de la media y luego la cadena de todos los caracteres juntos.
+
+** TESTS REALIZADOS **
+``` 
+import 'mocha';
+import {expect} from 'chai';
+import {meanAndConcatenate} from '../src/ejercicio-3';
+
+describe('meanAndConcatenate function tests', () => {
+  it('meanAndConcatenate([6, d, 1, i, w, 3, s]) returns [3.33, diws]', () => {
+    expect(meanAndConcatenate(
+        [6, 'd', 1, 'i', 'w', 3, 's'])).to.deep.equal([3.33, 'diws']);
+  });
+});
+```
 
 ### 3.4 Mover los ceros al final
 _[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-4.ts)_
@@ -238,9 +300,29 @@ export function moveZeros(numeros: number[]):number[] {
   return numeros;
 }
 ```
+
 El algoritmo para la implementación es muy sencillo. Vamos a recorrer el array de números que recibimos como entrada. Si el valor es un 0, cogemos el índice de la posición, eliminamos esa posición de array y sumamos uno al contador de ceros. Al eliminar esa posición no modifico el orden de de los demás elementos. 
 
 Una vez he recorrido todo el array tengo almacenado en la variable **contador** cuántos ceros habian en el array. Por tanto, hago tantos push como ceros habían. Con esto consigo que todos los ceros estén al final del array.
+
+** TESTS REALIZADOS **
+``` 
+import 'mocha';
+import {expect} from 'chai';
+import {moveZeros} from '../src/ejercicio-4';
+
+describe('moveZeros function tests', () => {
+  it('Mover de [1, 0, 1, 2, 0, 1, 3] a [1, 1, 2, 1, 3, 0, 0]', () => {
+    expect(moveZeros(
+        [1, 0, 1, 2, 0, 1, 3])).to.deep.equal([1, 1, 2, 1, 3, 0, 0]);
+  });
+
+  it('Mover de [1, 5, 6] a [1, 5, 6]', () => {
+    expect(moveZeros(
+        [1, 5, 6])).to.deep.equal([1, 5, 6]);
+  });
+});
+```
 
 ### 3.5 Factoría de multiplicaciones
 _[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-5.ts)_
@@ -264,8 +346,26 @@ export function multiplyAll(numeros: number[]) {
   };
 };
 ```
+
 Para poder llamar a una función tal cual hemos dicho antes debemos hacer que el return de la primera función sea otra función. Entonces, dentro de **multiplyAll**, en el return
 ponemos una función que reciba y número y lo que haga sea simplemente recorrer cada elemento del array de entrada de **multiplyAll**. Vamos almacenando estos elementos en un nuevo array y una vez hemos multiplicado todo podemos devolverlo.
+
+** TESTS REALIZADOS **
+``` 
+import 'mocha';
+import {expect} from 'chai';
+import {multiplyAll} from '../src/ejercicio-5';
+
+describe('multiplyAll function tests', () => {
+  it('Multiplicar de [3, 2, 1] por 3', () => {
+    expect(multiplyAll([3, 2, 1])(3)).to.deep.equal([9, 6, 3]);
+  });
+
+  it('Multiplicar de [1, 5, 6] por 0', () => {
+    expect(multiplyAll([1, 5, 6])(0)).to.deep.equal([0, 0, 0]);
+  });
+});
+```
 
 ### 3.6 Puntos bi-dimensionales
 _[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-6.ts)_
@@ -308,6 +408,40 @@ La operación se hace simplemente multiplicando cada componente del punto por un
 La cuarta y última función es la distancia Euclídea, que recibe dos puntos y devuelve un número como resultado.
 La fórmula para calcularla es:
 La raiz cuadrada de la suma de las diferencias de sus componentes al cuadrado. Es decir: sqrt((p1[0] - p2[0])^2 + (p1[1] - p2[1])^2)
+
+** TESTS REALIZADOS **
+``` 
+import 'mocha';
+import {expect} from 'chai';
+import {suma} from '../src/ejercicio-6';
+import {resta} from '../src/ejercicio-6';
+import {producto} from '../src/ejercicio-6';
+import {distancia} from '../src/ejercicio-6';
+
+describe('Ejer 6 suma function tests', () => {
+  it('Sumar [4, 2] con [1, 3]', () => {
+    expect(suma([4, 2], [1, 3])).to.deep.equal([5, 5]);
+  });
+});
+
+describe('Ejer 6 resta function tests', () => {
+  it('Restar [7, 4] con [1, 5]', () => {
+    expect(resta([7, 4], [1, 5])).to.deep.equal([6, -1]);
+  });
+});
+
+describe('Ejer 6 multiplicar function tests', () => {
+  it('Multiplicar [6, 5] con 5', () => {
+    expect(producto([6, 5], 5)).to.deep.equal([30, 25]);
+  });
+});
+
+describe('Ejer 6 distancia function tests', () => {
+  it('Distancia entre [4, 6] con [1, 5]', () => {
+    expect(distancia([4, 6], [1, 5])).to.deep.equal(3.1623);
+  });
+});
+```
 
 ### 3.7 Puntos n-dimensionales
 _[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-7.ts)_
@@ -369,6 +503,44 @@ Para hacer que puedan tener más componentes ponemos **...number[]**.
 
 La forma de trabajar las operaciones es exactamente a la descrita en el apartado 3.7 con la única diferencia de que ahora comprobamos que ambos puntos sean de las mismas dimensiones. Esto lo hacemos comprobando su longitud. Si la longitud de ambos coincide quiere decir que tienen la misma cantidad de componentes y, por tanto, las mismas dimensiones.
 
+** TESTS REALIZADOS **
+``` 
+import 'mocha';
+import {expect} from 'chai';
+import {suma} from '../src/ejercicio-7';
+import {resta} from '../src/ejercicio-7';
+import {producto} from '../src/ejercicio-7';
+import {distancia} from '../src/ejercicio-7';
+
+describe('Ejer 7 suma function tests', () => {
+  it('Sumar [6, 6, 2] con [5, 2, 3]', () => {
+    expect(suma([6, 6, 2], [5, 2, 3])).to.deep.equal([11, 8, 5]);
+  });
+
+  it('Sumar [6, 6, 2, 1] con [5, 2, 3, 1]', () => {
+    expect(suma([6, 6, 2, 1], [5, 2, 3, 1])).to.deep.equal([11, 8, 5, 2]);
+  });
+});
+
+describe('Ejer 7 resta function tests', () => {
+  it('Restar [6, 6, 2] con [5, 2, 3]', () => {
+    expect(resta([6, 6, 2], [5, 2, 3])).to.deep.equal([1, 4, -1]);
+  });
+});
+
+describe('Ejer 7 multiplicar function tests', () => {
+  it('Multiplicar [6, 5, 3] con 5', () => {
+    expect(producto([6, 5, 3], 5)).to.deep.equal([30, 25, 15]);
+  });
+});
+
+describe('Ejer 7 distancia function tests', () => {
+  it('Distancia entre [6, 6, 2] con [5, 2, 3]', () => {
+    expect(distancia([6, 6, 2], [5, 2, 3])).to.deep.equal(4.2426);
+  });
+});
+```
+
 ### 3.8 El agente
 _[Acceso al código fuente](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct04-arrays-tuples-enums-EduardoSY/blob/master/src/ejercicio-8.ts)_
 
@@ -420,6 +592,27 @@ Dependiendo de hacia donde sea el movimiento lo tomamos como positivo o negativo
 
 Por cada movimiento que hagamos realizamos un **push** a un vector de string, donde iremos almacenando el recorrido.
 Una vez llegamos al final devolvemos ese vector.
+
+** TESTS REALIZADOS **
+``` 
+import 'mocha';
+import {expect} from 'chai';
+import {agent} from '../src/ejercicio-8';
+
+describe('agent function tests', () => {
+  it('Tablero 6x6. Inicio = (1,3) Fin = (3,5) returns Este, Norte, Este, Norte'
+      , () => {
+        expect(agent(6, 6, [1, 3], [3, 5])).to.deep.
+            equal(["Este", "Norte", "Este", "Norte"]);
+      });
+
+  it('Tablero 6x6. Inicio = (6,3) Fin = (3,5) returns Fuera de los limites'
+      , () => {
+        expect(agent(6, 6, [6, 3], [3, 5])).to.deep.
+            equal(["Fuera de los limites"]);
+      });
+});
+```
 
 ## 4. Conclusión
 Este tipo de prácticas donde se nos proponen varios ejercicios que no ocupan muchas lineas me parecen muy amenos a la par que útiles. Podemos tratar diversos temas en una misma práctica pero sin resultar tedioso ya que cada ejercicio nos plantea algo diferente.
